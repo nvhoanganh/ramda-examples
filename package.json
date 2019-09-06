@@ -1,5 +1,5 @@
 {
-  "name": "ramda",
+  "name": "learnramda",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rambda": "^3.0.1"
+    "ramda": "^0.26.1"
   }
 }
