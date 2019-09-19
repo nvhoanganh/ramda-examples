@@ -9,12 +9,12 @@ const splitTrimUpper = R.pipe(
     )
   )
 );
-console.log(splitTrimUpper('a,b , c'))
+console.log(splitTrimUpper('a,b , c'));
 
 const MAX_COUNT = 3;
 const spacer = R.join(' ');
 
-console.log(spacer(['a', 'b']))
+console.log(spacer(['a', 'b']));
 
 const getPersonName = R.ifElse(
   R.has('lastName'),
@@ -25,7 +25,6 @@ const getPersonName = R.ifElse(
   R.prop('firstName')
 );
 
-
 console.log(
   getPersonName({
     firstName: 'anthony',
@@ -33,37 +32,70 @@ console.log(
   })
 );
 
-
 const isLongerThanLimit = data =>
-data.length > 1 && data.length <= MAX_COUNT + 1;
+  data.length > 1 && data.length <= MAX_COUNT + 1;
 
-console.log(isLongerThanLimit([1,3,4]))
+console.log(isLongerThanLimit([1, 3, 4]));
 
-console.log(isLongerThanLimit([1,3,4,5,6]))
+console.log(isLongerThanLimit([1, 3, 4, 5, 6]));
 
+const getNamesForShortList = R.compose(
+  R.join(', '),
+  getPersonName
+);
 
-const getNamesForShortList = R.pipe(() => console.log('short'));
+const getAllButLast = R.compose(
+  R.join(', '),
+  R.dropLast(1),
+  R.map(getPersonName)
+);
 
-const getNamesForLongList = R.pipe(() => console.log('long'));
+const getNamesForLongList = R.compose(
+  R.concat,
+  getAllButLast,
+  ' a  '
+);
+
+console.log(
+  getNamesForLongList([
+    {
+      firstName: 'Anthony'
+    },
+    {
+      firstName: 'Brent'
+    },
+    {
+      firstName: 'David'
+    },
+    {
+      firstName: 'William'
+    },
+    {
+      firstName: 'Bupa'
+    }
+  ])
+);
 
 const getNames = R.pipe(
   R.ifElse(isLongerThanLimit, getNamesForShortList, getNamesForLongList)
 );
 
-console.log(getNames([
-  {
-    firstName: 'Anthony'
-  },
-  {
-    firstName: 'Brent'
-  },
-  {
-    firstName: 'David'
-  },
-  {
-    firstName: 'William'
-  },
-  {
-    firstName: 'Bupa'
-  }
-]))
+console.log(
+  getNames([
+    {
+      firstName: 'Anthony'
+    },
+    {
+      firstName: 'Brent'
+    },
+    {
+      firstName: 'David'
+    },
+    {
+      firstName: 'William'
+    },
+    {
+      firstName: 'Bupa'
+    }
+  ])
+);
