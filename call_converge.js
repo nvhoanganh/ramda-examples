@@ -95,7 +95,9 @@ const toTitleCase = R.compose(
 );
 
 console.log(toTitleCase('hello there'));
+
 console.log(toTitleCase('hello'));
+
 console.log(toTitleCase(' hi there '));
 
 console.log(toTitleCase(''));
